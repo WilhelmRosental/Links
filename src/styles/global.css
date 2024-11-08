@@ -1,0 +1,353 @@
+@layer theme, base, components, utilities;
+@import "@radix-ui/themes/styles";
+@import "tailwindcss";
+@import "tailwindcss/preflight" layer(base);
+@import "tailwindcss/utilities" layer(utilities);
+
+@theme {
+  /* Colors */
+  --color-marine-400: #1f1f69;
+  --color-marine-500: #1a1a51;
+  --color-marine-600: #0e0e2b;
+  --color-marine-700: #0d0d27;
+  --color-marine-800: #00001f;
+  --color-marine-900: #00001a;
+  --color-marine-950: #00000d;
+
+  --color-gray-10: rgba(42, 44, 69, 0.1);
+
+  /* Background-Image */
+  --background-image-card: linear-gradient(
+    rgba(255, 51, 204, 0.02) 0%,
+    rgba(102, 0, 204, 0.015) 100%
+  );
+  --background-image-grain-800: url("/grain-800.svg");
+  --background-image-grain-900: url("/grain-900.svg");
+  --background-image-grain-gray-900: url("/grain-gray-900.svg");
+
+  /* Box Shadow */
+  --shadow-default: 0 1px 3px 0 rgba(0, 0, 0, 0.12),
+    0 1px 2px 0 rgba(0, 0, 0, 0.03);
+  --shadow-card-border: 0 0 0 1px #ffffff0f, 0 -1px #ffffff1a;
+  --shadow-xs: 0 0 0 1px rgba(0, 0, 0, 0.16);
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.16);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.04),
+    0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.04),
+    0 4px 6px -2px rgba(0, 0, 0, 0.02);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.12),
+    0 10px 10px -5px rgba(0, 0, 0, 0.02);
+  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+  --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.04);
+  --shadow-outline: 0 0 0 3px rgba(66, 153, 225, 0.5);
+  --shadow-none: none;
+
+  /* Font Size */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 2rem;
+  --text-4xl: 2.625rem;
+  --text-5xl: 3.25rem;
+  --text-6xl: 5.5rem;
+
+  /* Line Height */
+  --leading-none: 1;
+  --leading-tighter: 1.125;
+  --leading-tight: 1.25;
+  --leading-snug: 1.375;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.625;
+  --leading-loose: 2;
+  --leading-3: 0.75rem;
+  --leading-4: 1rem;
+  --leading-5: 1.2rem;
+  --leading-6: 1.5rem;
+  --leading-7: 1.75rem;
+  --leading-8: 2rem;
+  --leading-9: 2.25rem;
+  --leading-10: 2.5rem;
+
+  /* Width */
+  --w-128: 32rem;
+  --w-full: 100%;
+
+  /* Height */
+  --h-full: 100%;
+
+  /* Min Width */
+  --min-w-10: 2.5rem;
+  --min-w-48: 12rem;
+
+  /* Max Width */
+  --max-w-8xl: 90rem;
+
+  /* Letter Spacing */
+  --tracking-tighter: -0.02em;
+  --tracking-tight: -0.01em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.01em;
+  --tracking-wider: 0.02em;
+  --tracking-widest: 0.04em;
+
+  /* Scale */
+  --scale-98: 0.98;
+
+  /* Border Radius */
+  --rounded-4xl: 2rem;
+
+  /* Opacity */
+  --opacity-90: 0.9;
+
+  /* Inset */
+  --inset-50: 50%;
+  --inset-full: 100%;
+}
+
+body {
+  background-image: url("#noiseFilter");
+  background-repeat: repeat;
+}
+
+.text-gradient-primary {
+  background: linear-gradient(
+    #fff,
+    #ffb1da 21%,
+    #ff5bb3 48%,
+    #7100ff 77%,
+    #000
+  );
+  background-clip: text;
+}
+
+.text-gradient-secondary {
+  background: linear-gradient(#fff, #ff9bd0 52%, #8a00ff);
+  background-clip: text;
+}
+
+.text-gradient-tertiary {
+  background: linear-gradient(145deg, #ffb1da 22%, #7100ff 45%);
+  background-clip: text;
+}
+
+.gradient-box {
+  position: relative;
+  background: #faf5ff;
+}
+
+.dark .gradient-box {
+  position: relative;
+  color: #e9d5ff;
+  background: #020117;
+}
+
+.gradient-box::after {
+  content: "";
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  background: linear-gradient(to bottom, #b525dc 60%, #5e02bd 72%);
+  z-index: -1;
+  border-radius: 15px;
+}
+
+.gradient-box::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, #b525dc 60%, #5e02bd 72%);
+  z-index: -2;
+  filter: blur(30px);
+}
+
+.animated-bg {
+  background-image: repeating-linear-gradient(
+      100deg,
+      #00001a 0%,
+      #00001a 7%,
+      transparent 10%,
+      transparent 12%,
+      #00001a 16%
+    ),
+    repeating-linear-gradient(
+      100deg,
+      #02d5ff 10%,
+      #02d5ff 15%,
+      #00001a 20%,
+      #e55eb1 25%,
+      #e55eb1 30%
+    );
+  background-size: 300% 200%;
+  background-position: 50% 50%, 50% 50%;
+
+  filter: blur(10px);
+  mask-image: radial-gradient(ellipse at 100% 0%, black 25%, transparent 65%);
+}
+
+.animated-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+      100deg,
+      #00001a 0%,
+      #00001a 7%,
+      transparent 10%,
+      transparent 12%,
+      #00001a 16%
+    ),
+    repeating-linear-gradient(
+      100deg,
+      #e55eb1 10%,
+      #5300b0 15%,
+      #e55eb1 20%,
+      #5300b0 25%,
+      #e55eb1 30%
+    );
+
+  background-size: 200%, 100%;
+  animation: gradientAnimation 50s linear infinite;
+  background-attachment: fixed;
+  mix-blend-mode: soft-light;
+}
+
+@keyframes enterFromRight {
+  from: {
+    opacity: 0;
+    transform: "translateX(200px)";
+  }
+  to: {
+    opacity: 1;
+    transform: "translateX(0)";
+  }
+}
+
+@keyframes enterFromLeft {
+  from: {
+    opacity: 0;
+    transform: "translateX(-200px)";
+  }
+  to: {
+    opacity: 1;
+    transform: "translateX(0)";
+  }
+}
+
+@keyframes exitToRight {
+  from: {
+    opacity: 1;
+    transform: "translateX(0)";
+  }
+  to: {
+    opacity: 0;
+    transform: "translateX(200px)";
+  }
+}
+
+@keyframes exitToLeft {
+  from: {
+    opacity: 1;
+    transform: "translateX(0)";
+  }
+  to: {
+    opacity: 0;
+    transform: "translateX(-200px)";
+  }
+}
+
+@keyframes scaleIn {
+  from: {
+    opacity: 0;
+    transform: "rotateX(-10deg) scale(0.9)";
+  }
+  to: {
+    opacity: 1;
+    transform: "rotateX(0deg) scale(1)";
+  }
+}
+
+@keyframes scaleOut {
+  from: {
+    opacity: 1;
+    transform: "rotateX(0deg) scale(1)";
+  }
+  to: {
+    opacity: 0;
+    transform: "rotateX(-10deg) scale(0.9)";
+  }
+}
+
+@keyframes fadeIn {
+  from: {
+    opacity: 0;
+  }
+  to: {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from: {
+    opacity: 1;
+  }
+  to: {
+    opacity: 0;
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes textGradient {
+  0% {
+    background-size: 200% 200%;
+    background-position: left center;
+  }
+  50% {
+    background-size: 200% 200%;
+    background-position: right center;
+  }
+  100% {
+    background-size: 200% 200%;
+    background-position: left center;
+  }
+}
+
+@keyframes gradientAnimation {
+  from {
+    background-position: 50% 50%, 50% 50%;
+  }
+  to {
+    background-position: 350% 50%, 350% 50%;
+  }
+}
+
+/* animation: {
+    scaleIn: "scaleIn 100ms ease",
+    scaleOut: "scaleOut 100ms ease",
+    fadeIn: "fadeIn 100ms ease",
+    fadeOut: "fadeOut 100ms ease",
+    enterFromLeft: "enterFromLeft 150ms ease",
+    enterFromRight: "enterFromRight 150ms ease",
+    exitToLeft: "exitToLeft 150ms ease",
+    exitToRight: "exitToRight 150ms ease",
+    float: "float 3s ease-in-out infinite",
+    textGradient: "textGradient 7s ease infinite",
+  }, */
